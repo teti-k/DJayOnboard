@@ -36,8 +36,8 @@ final class ActionView: UIView {
         textLabel.text = Copy.Onboarding.welcomeTitle
         textLabel.font = Fonts.body
         textLabel.textColor = Styling.Colors.textColor
-        textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
+        textLabel.adjustsFontSizeToFitWidth = true
         addSubview(button)
         addSubview(textLabel)
     }

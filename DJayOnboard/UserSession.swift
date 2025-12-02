@@ -14,6 +14,8 @@ protocol UserSession {
     var isLoggedIn: Bool { get }
     /// The current user object
     var user: User { get }
+    /// Returns true if user has finished onboarding
+    var isOnboarded: Bool { get }
     /// Marks the onboarding process as finished
     func setFinishedOnboarding()
     /// Updates the user's proficiency level

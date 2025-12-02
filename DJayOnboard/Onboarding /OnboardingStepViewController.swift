@@ -14,7 +14,7 @@ final class OnboardingStepViewController: UIViewController {
     private let contentStack = UIStackView()
     private var heroContentView: HeroContentView!
     private var chooseLevelContentView: ChooseLevelContentView!
-    private var newUserInfoView: NewUserInfoView!
+    private var newUserInfoView: UserJourneySelectionView!
     private let viewModel: OnboardingViewModel
     private var cancellables = Set<AnyCancellable>()
 
@@ -60,7 +60,7 @@ final class OnboardingStepViewController: UIViewController {
 
     private func setupPublishers() {
         viewModel.statePublisher
-            .map(\.step)
+            .compactMap(\.step)
             .receive(on: RunLoop.main)
             .sink { [weak self] step in
                 self?.apply(step)
@@ -91,7 +91,7 @@ final class OnboardingStepViewController: UIViewController {
 
         heroContentView = HeroContentView()
         chooseLevelContentView = ChooseLevelContentView(onLevelSelected: viewModel.selectLevel(_:))
-        newUserInfoView = NewUserInfoView(onJourneySelected: viewModel.selectJourney(_:))
+        newUserInfoView = UserJourneySelectionView(onJourneySelected: viewModel.selectJourney(_:))
 
         [heroContentView, chooseLevelContentView, newUserInfoView].forEach { page in
             page.translatesAutoresizingMaskIntoConstraints = false

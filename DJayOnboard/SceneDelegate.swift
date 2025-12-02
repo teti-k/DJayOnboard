@@ -8,6 +8,13 @@
 import UIKit
 import Combine
 
+enum OnboardingLaunchMode {
+    /// Use UserDefaults
+    case normal
+    /// Always launch onboarding
+    case alwaysOnboarding
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var onboardingCancellable: AnyCancellable?
@@ -19,7 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        var rootVC: UIViewController
         let userSession = UserSessionImpl(
             user: User(userID: "12345678", userName: "Jane Apple"),
             loggedIn: true
@@ -30,18 +36,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .filter { $0 }
             .sink { [weak self] _ in self?.switchToHome() }
 
-        if userSession.isOnboarded == false {
-            let onboardingService = OnboardingServiceImpl(userSession: userSession)
-            rootVC = onboardingService.createOnboardingFlow()
-        } else {
-            rootVC = createHomeVC()
-        }
+        // MARK: - Change `normal` to `alwaysOnboarding` to always load the onboarding screen
+        let rootVC = makeRootViewController(.alwaysOnboarding, userSession)
+        let navigationController = UINavigationController(rootViewController: rootVC)
+        window.rootViewController = navigationController
 
-        let nav = UINavigationController(rootViewController: rootVC)
-        window.rootViewController = nav
+        let navigationVC = UINavigationController(rootViewController: rootVC)
+        window.rootViewController = navigationVC
         window.makeKeyAndVisible()
 
         self.window = window
+    }
+
+    private func makeRootViewController(_ launchMode: OnboardingLaunchMode, _ userSession: UserSession) -> UIViewController {
+        if launchMode == .normal && userSession.isOnboarded == true {
+            return createHomeVC()
+        } else {
+            let onboardingService = OnboardingServiceImpl(userSession: userSession)
+            return onboardingService.createOnboardingFlow()
+        }
     }
 
     private func createHomeVC() -> UIViewController {

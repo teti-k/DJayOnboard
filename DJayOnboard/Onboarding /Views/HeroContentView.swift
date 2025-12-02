@@ -68,10 +68,15 @@ final class HeroContentView: UIView {
         logoTopConstraint = logoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 200)
         logoTopConstraint.isActive = true
     }
-    
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayout(for: .zero)
+    }
+
     func updateLayout(for size: CGSize) {
         guard stack.isHidden else { return }
-        let isLandscape = size.width > size.height
+        let isLandscape = traitCollection.verticalSizeClass == .compact
         logoTopConstraint.constant = isLandscape ? Metrics.Spacing.large : 200
     }
 

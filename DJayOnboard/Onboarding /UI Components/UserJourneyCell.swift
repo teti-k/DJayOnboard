@@ -8,7 +8,7 @@
 import UIKit
 
 /// A cell that displays user journey in the final step of the onboarding process
-final class NewUserInfoCell: UIControl {
+final class UserJourneyCell: UIControl {
     private let titleLabel = UILabel()
     private let bodyLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -116,5 +116,5 @@ final class NewUserInfoCell: UIControl {
 
 @available(iOS 17, *)
 #Preview {
-    NewUserInfoCell(journeyOption: .journey1)
+    UserJourneyCell(journeyOption: .journey1)
 }

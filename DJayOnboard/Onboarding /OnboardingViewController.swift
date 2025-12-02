@@ -32,7 +32,6 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupBindings()
         setupViews()
         setupConstraints()
@@ -146,6 +145,7 @@ class OnboardingViewController: UIViewController {
         viewModel.statePublisher
             .compactMap(\.level)
             .receive(on: RunLoop.main)
+            .removeDuplicates()
             .sink { [weak self] level in
                 self?.selectedLevel(level)
             }
@@ -164,7 +164,6 @@ class OnboardingViewController: UIViewController {
     private func updateScrollBehavior(for size: CGSize) {
         let isLandscape = size.height < size.width
         scrollView.isScrollEnabled = isLandscape
-        scrollView.alwaysBounceVertical = isLandscape
     }
 
     private func apply(_ step: OnboardingStep) {

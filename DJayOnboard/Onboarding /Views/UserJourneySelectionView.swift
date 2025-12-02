@@ -7,10 +7,10 @@
 import UIKit
 
 /// A view that allows the user to choose their journey as a final step of onboarding
-final class NewUserInfoView: UIView {
+final class UserJourneySelectionView: UIView {
     private let titleLabel = UILabel()
     private let stackView = UIStackView()
-    private var selectedControl: NewUserInfoCell?
+    private var selectedControl: UserJourneyCell?
     private var onJourneySelected: ((ProficiencyLevel.Journey) -> Void)?
 
     var level: ProficiencyLevel = .beginner {
@@ -57,14 +57,14 @@ final class NewUserInfoView: UIView {
     private func populateData() {
         let data = NewUserInfoViewModel.provideNextSteps(for: level)
         data.forEach { element in
-            let cell = NewUserInfoCell(journeyOption: element.journeyOption)
+            let cell = UserJourneyCell(journeyOption: element.journeyOption)
             cell.configure(with: element)
             cell.addTarget(self, action: #selector(userInfoCellTapped(_:)), for: .touchUpInside)
             stackView.addArrangedSubview(cell)
         }
     }
 
-    @objc private func userInfoCellTapped(_ sender: NewUserInfoCell) {
+    @objc private func userInfoCellTapped(_ sender: UserJourneyCell) {
         selectedControl?.isSelected = false
         sender.isSelected = true
         selectedControl = sender
@@ -74,5 +74,5 @@ final class NewUserInfoView: UIView {
 
 @available(iOS 17, *)
 #Preview {
-    NewUserInfoView(onJourneySelected: {_ in} )
+    UserJourneySelectionView(onJourneySelected: {_ in} )
 }
