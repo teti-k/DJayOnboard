@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .sink { [weak self] _ in self?.switchToHome() }
 
         // MARK: - Change `normal` to `alwaysOnboarding` to always load the onboarding screen
-        let rootVC = makeRootViewController(.alwaysOnboarding, userSession)
+        let rootVC = makeRootViewController(.normal, userSession)
         let navigationController = UINavigationController(rootViewController: rootVC)
         window.rootViewController = navigationController
 

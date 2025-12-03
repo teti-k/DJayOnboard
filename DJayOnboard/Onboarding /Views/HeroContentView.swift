@@ -71,10 +71,10 @@ final class HeroContentView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateLayout(for: .zero)
+        updateLayout()
     }
 
-    func updateLayout(for size: CGSize) {
+    func updateLayout() {
         guard stack.isHidden else { return }
         let isLandscape = traitCollection.verticalSizeClass == .compact
         logoTopConstraint.constant = isLandscape ? Metrics.Spacing.large : 200

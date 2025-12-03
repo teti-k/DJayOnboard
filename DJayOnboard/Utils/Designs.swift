@@ -20,7 +20,6 @@ enum Fonts {
     static var isSmallScreen: Bool {
         let height = UIScreen.main.bounds.height
         let width = UIScreen.main.bounds.width
-        // Portrait only, for iPhone SE/8/SE2
         return (height == 568 || height == 667) && width <= 375
     }
 
@@ -56,7 +55,6 @@ enum Metrics {
     static var isSmallScreen: Bool {
         let height = UIScreen.main.bounds.height
         let width = UIScreen.main.bounds.width
-        // Portrait only, for iPhone SE/8/SE2
         return (height == 568 || height == 667) && width <= 375
     }
     enum Spacing {

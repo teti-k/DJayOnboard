@@ -23,8 +23,8 @@ final class GradientView: UIView {
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         gradientLayer.colors = [
-            Styling.Colors.backgroundSecondaryColor.cgColor,    // top
-            Styling.Colors.backgroundPrimaryColor.cgColor // bottom
+            Styling.Colors.backgroundSecondaryColor.cgColor,
+            Styling.Colors.backgroundPrimaryColor.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.endPoint   = CGPoint(x: 0.5, y: 1.0)

@@ -10,8 +10,8 @@ import UIKit
 ///  Initialize with title
 final class OptionControl: UIControl {
     private let backgroundView = UIView()
-    private let borderView = UIView()       // selection glow border
-    private let circleContainer = UIView()  // always round
+    private let borderView = UIView()
+    private let circleContainer = UIView()
     private let checkmark = UIImageView()
     private let titleLabel = UILabel()
 

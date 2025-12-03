@@ -51,7 +51,7 @@ final class OnboardingStepViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        heroContentView.updateLayout(for: size)
+        heroContentView.updateLayout()
         coordinator.animate { [weak self] _ in
             guard let self = self else { return }
             self.scrollTo(step: self.viewModel.currentStep, animated: false)
